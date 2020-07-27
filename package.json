@@ -1,0 +1,29 @@
+{
+  "name": "project-management-tool",
+  "version": "1.0.0",
+  "description": "Tool to upload and share projects and add comments on there",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MiguelValle94/project-management-tool.git"
+  },
+  "author": "Miguel Valle",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MiguelValle94/project-management-tool/issues"
+  },
+  "homepage": "https://github.com/MiguelValle94/project-management-tool#readme",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "bcrypt": "^5.0.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "faker": "^4.1.0",
+    "mongoose": "^5.9.25",
+    "nodemailer": "^6.4.10",
+    "nodemon": "^2.0.4"
+  }
+}
