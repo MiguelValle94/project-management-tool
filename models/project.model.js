@@ -5,7 +5,7 @@ require('./comment.model')
 
 const projectSchema = new mongoose.Schema(
   { 
-    document: {
+    title: {
         type: String,
     },
     user: {
@@ -13,7 +13,11 @@ const projectSchema = new mongoose.Schema(
       ref: 'User',
       required: true,
     },
-    body: {
+    description: {
+      type: String,
+      required: true,
+    },
+    link: {
       type: String,
       required: true,
     },
@@ -22,22 +26,22 @@ const projectSchema = new mongoose.Schema(
     },
   },
   { timestamps: true, toJSON: { virtuals: true } }
-);
+)
 
-tweetSchema.virtual("comments", {
-  ref: "Comment",
-  localField: "_id",
-  foreignField: "tweet",
+projectSchema.virtual('comments', {
+  ref: 'Comment',
+  localField: '_id',
+  foreignField: 'project',
   justOne: false,
-});
+})
 
-tweetSchema.virtual("likes", {
-  ref: "Like",
-  localField: "_id",
-  foreignField: "tweet",
+projectSchema.virtual('likes', {
+  ref: 'Like',
+  localField: '_id',
+  foreignField: 'project',
   justOne: false
-});
+})
 
-const Tweet = mongoose.model("Tweet", tweetSchema);
+const Project = mongoose.model('Project', projectSchema)
 
-module.exports = Tweet;
+module.exports = Project
