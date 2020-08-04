@@ -8,9 +8,9 @@ const sessionMiddleware = require('../middlewares/session.middleware')
 
 router.get('/', (req, res) => res.redirect('/projects'))
 
-router.get('/login', userController.renderLogin)
+router.get('/login', sessionMiddleware.noAuthenticated, userController.renderLogin)
 // router.post('/login', userController.Login)
-// router.get('/signup', userController.renderSignup)
+router.get('/signup', sessionMiddleware.noAuthenticated, userController.renderSignup)
 // router.post('/users', uploads.single('avatar'), userController.signup)
 // router.get('/activate/:token', userController.activateUser)
 // router.post('/logout', sessionMiddleware.authenticated, userController.logout)

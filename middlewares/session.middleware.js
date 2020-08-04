@@ -14,3 +14,16 @@ module.exports.authenticated = (req, res, next) => {
     })
     .catch(next)
 }
+
+
+module.exports.noAuthenticated = (req, res, next) => {
+  User.findById(req.session.userId)
+    .then((user) => {
+      if (user) {
+        res.redirect("/")
+      } else {
+        next()
+      }
+    })
+    .catch(next)
+};

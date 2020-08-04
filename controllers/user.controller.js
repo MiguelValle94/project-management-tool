@@ -51,9 +51,9 @@ module.exports.renderLogin = (req, res, next) => {
 //     .catch(next)
 // }
   
-// module.exports.signup = (req, res, next) => {
-//     res.render('users/signup')
-// }
+module.exports.renderSignup = (req, res, next) => {
+    res.render('users/signup')
+}
   
 //   module.exports.createUser = (req, res, next) => {
 //     const userParams = req.body;
