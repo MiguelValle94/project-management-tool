@@ -2,6 +2,7 @@ const mongoose = require('mongoose')
 
 require('./user.model')
 require('./comment.model')
+require('./like.model')
 
 const projectSchema = new mongoose.Schema(
   { 
@@ -23,6 +24,7 @@ const projectSchema = new mongoose.Schema(
     },
     image: {
       type: String,
+      default: 'http://globaliaconsultancy.com/wp-content/uploads/2019/02/PJ.jpg'
     },
   },
   { timestamps: true, toJSON: { virtuals: true } }

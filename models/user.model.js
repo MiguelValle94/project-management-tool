@@ -28,6 +28,7 @@ const userSchema = new mongoose.Schema(
         },
         avatar: {
         type: String,
+        default: 'https://www.artconnect.com/assets/default/default_profile_list-66ce52009aa2c20dc5cfb87133f406a1c8336a157bf28df24f1b1f24651b1fda.png',
         },
         password: {
         type: String,

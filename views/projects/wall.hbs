@@ -1,0 +1,37 @@
+<section id="projects" class="container">
+  {{#each projects}}
+  <div class="card w-20 m-3">
+    <div class="m-3 card-body d-flex flex-column align-items-center">
+      <p class="card-subtitle mb-2 text-muted">{{this.createdAt}}</p>
+
+      <h3 class="card-text">
+        Title: {{this.title}}
+      </h3>
+
+      <p class="card-text">
+        Created by: <b>{{this.user.username}}</b>
+      </p>
+
+      <p class="card-text">
+        {{this.description}}
+      </p>
+
+      <a href="{{this.link}}" class="btn btn-secondary mb-3">Link to the project</a>
+
+      <img class="rounded-sm w-20 mb-1" src="{{this.image}}" />
+
+      <a class="text-muted d-block text-sm mb-2" href="/tweets/{{t._id}}">
+        <i class="fa fa-comments"></i>
+        {{this.comments.length}} comments
+      </a>
+
+      <div>
+        <button class="btn btn-sm mb-2 btn-outline-danger" id="{{t._id}}" onclick="like(event)">
+          <i class="fa fa-heart"></i>
+          <span class="likes-count">{{this.likes.length}}</span> likes
+        </button>
+      </div>
+    </div>
+  </div>
+  {{/each}}
+</section>

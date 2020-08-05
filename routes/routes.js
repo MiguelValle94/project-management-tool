@@ -15,7 +15,7 @@ router.get('/signup', sessionMiddleware.noAuthenticated, userController.renderSi
 // router.get('/activate/:token', userController.activateUser)
 // router.post('/logout', sessionMiddleware.authenticated, userController.logout)
 
-router.get('/projects', sessionMiddleware.authenticated, projectController.renderAll)
+router.get('/projects', projectController.renderAll)
 // router.get('/projects/:id', sessionMiddleware.authenticated, projectController.renderProject)
 // router.post('/projects/:id/like', sessionMiddleware.authenticated, projectController.like)
 

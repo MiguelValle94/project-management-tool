@@ -4,10 +4,11 @@ module.exports.renderAll = (req, res, next) => {
   Project.find()
     .sort({ createdAt: -1 })
     .populate('user')
-    // .populate('comments')
-    // .populate('likes')
+    .populate('comments')
+    .populate('likes')
     .then((projects) => {
-      res.render('project/wall', {
+      console.log(projects);
+      res.render('projects/wall', {
         projects,
         user: req.currentUser
       })
