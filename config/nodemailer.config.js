@@ -18,7 +18,7 @@ module.exports.sendValidationEmail = (email, token, username) => {
 	transport.sendMail({
 		to: email,
 		from: 'Project Management Tool team',
-		subject: 'Please activate ypur account',
+		subject: 'Please activate your account',
         html: `
         <div style='text-align:center; background-color:rgb(232,232,232)'>
             <h1>Project Management Tool Confirmation Email!</h1>
