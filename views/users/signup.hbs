@@ -1,18 +1,6 @@
-
 <h3 class="mt-3">Sign Up:</h3>
 
-<form action="/users" method="POST" enctype="multipart/form-data">
-  <div class="form-group">
-    <label for="name">Name</label>
-    <input name="name" type="text" class="form-control {{#if error.name }}is-invalid{{/if}}" id="name"
-      placeholder="Enter name" value="{{ user.name }}">
-
-    {{#if error.name}}
-    <div class="invalid-feedback">
-      {{error.name.message}}
-    </div>
-    {{/if}}
-  </div>
+<form action="/signup" method="POST" enctype="multipart/form-data">
 
   <div class="form-group">
     <label for="username">Username</label>

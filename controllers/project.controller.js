@@ -7,7 +7,6 @@ module.exports.renderAll = (req, res, next) => {
     .populate('comments')
     .populate('likes')
     .then((projects) => {
-      console.log(projects);
       res.render('projects/wall', {
         projects,
         user: req.currentUser
