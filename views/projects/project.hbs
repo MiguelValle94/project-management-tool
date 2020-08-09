@@ -1,0 +1,32 @@
+<div class="card w-20 m-3 m-3 card-body d-flex flex-column align-items-center">
+    <h4>{{title}}</h2>
+        <h5>User: {{project.user.username}}</h5>
+        <p>{{project.description}}</p>
+        <a href="{{project.link}}" class="btn btn-secondary mb-3">Link to the project</a>
+        <img class="rounded-sm w-20 mb-1" src="{{project.image}}" />
+        <h4 class="mt-5">Comments:</h4>
+        <div id="form" class="w-100">
+            <h5>Create a new comment:</h5>
+            <form action="/new-comment/{{this.id}}" method="POST" enctype="multipart/form-data">
+                <div class="form-group">
+                    <textarea id="input-content" name="text" placeholder="Your text" class="w-100"></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-secondary">Create comment</button>
+
+                {{#if errorMessage}}
+                <p class="error">{{errorMessage}}</p>
+                {{/if}}
+            </form>
+        </div>
+        {{#each project.comments as |com|}}
+        <div class="card m-3 p-2 w-100">
+            <div>
+                <b>{{com.user.username}}</b>
+            </div>
+            <div>
+                {{com.text}}
+            </div>
+        </div>
+        {{/each}}
+</div>

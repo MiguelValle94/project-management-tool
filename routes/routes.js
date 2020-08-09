@@ -15,8 +15,10 @@ router.get('/activate/:token', userController.activate)
 
 
 router.get('/projects',  sessionMiddleware.authenticated, projectController.renderAll)
-// router.get('/projects/:id', sessionMiddleware.authenticated, projectController.renderProject)
+router.get('/projects/:id', sessionMiddleware.authenticated, projectController.renderProject)
 // router.post('/projects/:id/like', sessionMiddleware.authenticated, projectController.like)
+
+router.post('/new-comment/:id', sessionMiddleware.authenticated, projectController.newComment)
 
 router.post('/logout', sessionMiddleware.authenticated, userController.logout)
 

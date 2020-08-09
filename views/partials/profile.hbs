@@ -1,8 +1,7 @@
-<img src="{{user.avatar}}" class="w-100 rounded-circle mb-3" style="width:60px!important" />
+<img src="{{current.avatar}}" class="w-100 rounded-circle mb-3" style="width:60px!important" />
 
 <p>
-  {{user.name}}<br>
-  Username: <a href="/{{user.username}}">{{user.username}}</a>
+  Username: <a href="/{{current.username}}">{{current.username}}</a>
 </p>
 
 <form action="/logout" method="post">
