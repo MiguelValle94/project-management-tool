@@ -1,6 +1,10 @@
 const bcrypt = require('bcrypt')
 const mongoose = require('mongoose')
 
+require('./project.model')
+require('./comment.model')
+require('./like.model')
+
 const generateRandomToken = () => {
   const characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
   let token = ''
@@ -47,6 +51,13 @@ const userSchema = new mongoose.Schema(
     },
     { timestamps: true, toJSON: { virtuals: true } }
   )
+
+userSchema.virtual('projects', {
+  ref: 'Project',
+  localField: '_id',
+  foreignField: 'user',
+  justOne: false,
+})
 
 userSchema.pre('save', function (next) {
   if (this.isModified('password')) {

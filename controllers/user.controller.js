@@ -1,5 +1,8 @@
 const mongoose = require('mongoose')
 const User = require('../models/user.model')
+const Project = require('../models/project.model')
+const Comment = require('../models/comment.model')
+const Like = require('../models/like.model')
 const nodemailer = require('../config/nodemailer.config')
 
 
@@ -93,4 +96,18 @@ module.exports.activate = (req, res, next) => {
 module.exports.logout = (req, res, next) => {
     req.session.destroy()
     res.redirect('/login')
+}
+
+module.exports.renderProfile = (req, res, next) => {
+    User.findById(req.params.id)
+    .sort({ createdAt: -1 })
+    .populate('projects')
+    .then(user => {
+        console.log(user.projects);
+        res.render('users/profile', {
+            user,
+            current: req.currentUser
+        })
+    })
+    .catch(err => console.log(err))
 }

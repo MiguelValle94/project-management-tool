@@ -1,0 +1,52 @@
+<div class="container">
+    <div class="d-flex justify-content-between align-items-center">
+        <img src="{{user.avatar}}" alt="" class="avatar" style="width: 80px!important;">
+        <h2>{{user.username}}!</h2>
+        <p>Your email is: {{user.email}}</p>
+    </div>
+
+    <div class="mt-4 mb-4"><a href="/new-project" class="btn btn-primary">New Project</a></div>
+
+    <div class="container">
+        {{#each user.projects as |project|}}
+        <div class="card w-20 m-3">
+            <div class="m-3 card-body d-flex flex-column align-items-center">
+                <p class="card-subtitle mb-2 text-muted">{{project.createdAt}}</p>
+
+                <h3 class="card-text">
+                    Title: {{project.title}}
+                </h3>
+
+                <p class="card-text">
+                    Created by: <b>{{project.user.username}}</b>
+                </p>
+
+                <p class="card-text">
+                    {{project.description}}
+                </p>
+
+                <a href="{{project.link}}" class="btn btn-secondary mb-3">Link to the project</a>
+
+                <img class="rounded-sm w-20 mb-1" src="{{project.image}}" />
+
+                <a class="text-muted d-block text-sm mb-2" href="/projects/{{project._id}}">
+                    <i class="fa fa-comments"></i>
+                    {{project.comments.length}} comments
+                </a>
+
+                <div>
+                    <button class="btn btn-sm mb-2 btn-outline-danger" id="{{project.id}}" onclick="like(event)">
+                        <i class="fa fa-heart"></i>
+                        <span class="likes-count">{{project.likes.length}}</span> likes
+                    </button>
+                </div>
+
+                <a class="text-muted d-block text-sm mb-2" href="/projects/{{project._id}}/edit">
+                    <i class="fa fa-comments"></i>
+                    {{project.comments.length}} comments
+                </a>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+</div>

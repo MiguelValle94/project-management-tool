@@ -9,7 +9,7 @@ module.exports.renderAll = (req, res, next) => {
     .populate('comments')
     .populate('likes')
     .limit(20)
-    .then((projects) => {
+    .then(projects => {
       res.render('projects/wall', {
         projects,
         current: req.currentUser
@@ -57,18 +57,18 @@ module.exports.like = (req, res, next) => {
   .then(like => {
     if (like) {
       Like.findByIdAndRemove(like._id)
-        .then(() => {
-          res.json({ like: -1 });
-        })
-        .catch(next);
+      .then(() => {
+        res.json({ like: -1 })
+      })
+      .catch(next)
     } else {
-      const newLike = new Like(params);
+      const newLike = new Like(params)
       newLike.save()
-        .then(() => {
-          res.json({ like: 1 });
-        })
-        .catch(next);
+      .then(() => {
+        res.json({ like: 1 })
+      })
+      .catch(next)
     }
   })
-  .catch(next);
+  .catch(next)
 }

@@ -19,6 +19,8 @@ router.get('/projects/:id', sessionMiddleware.authenticated, projectController.r
 router.post('/projects/:id/like', sessionMiddleware.authenticated, projectController.like)
 router.post('/new-comment/:id', sessionMiddleware.authenticated, projectController.newComment)
 
+router.get('/profile/:id', sessionMiddleware.authenticated, userController.renderProfile)
+
 router.post('/logout', sessionMiddleware.authenticated, userController.logout)
 
 module.exports= router
