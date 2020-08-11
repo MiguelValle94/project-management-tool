@@ -40,11 +40,11 @@ module.exports.renderProject= (req, res, next) => {
 
 module.exports.newComment = (req, res) => {
   const commentData = req.body
-  commentData.user = req.session.currentUser._id
+  commentData.user = req.currentUser._id
   commentData.project =  req.params.id
   const comment = new Comment (commentData)
 
   comment.save()
-  .then(() => res.redirect(`/project/${req.params.id}`))
+  .then(() => res.redirect(`/projects/${req.params.id}`))
   .catch(err => console.log(err))
 }
