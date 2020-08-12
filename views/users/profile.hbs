@@ -1,7 +1,7 @@
 <div class="container">
     <h4>PROFILE:</h4>
     <div class="d-flex justify-content-between align-items-center">
-        <img src="{{user.avatar}}" alt="" class="avatar" style="width: 80px!important;">
+        <img src="{{current.avatar}}" alt="" class="avatar" style="width: 80px!important;">
         <h2>{{current.username}}!</h2>
         <p>Your email is: {{current.email}}</p>
     </div>
@@ -28,7 +28,7 @@
 
                 <a href="{{project.link}}" class="btn btn-secondary mb-3">Link to the project</a>
 
-                <img class="rounded-sm w-20 mb-1" src="{{project.image}}"/>
+                <img class="rounded-sm w-20 mb-1" src="{{project.image}}" style="width: 450px!important;"/>
 
                 <a class="text-muted d-block text-sm mb-2" href="/projects/{{project._id}}">
                     <i class="fa fa-comments"></i>
@@ -41,7 +41,7 @@
                         <span class="likes-count">{{project.likes.length}}</span> likes
                     </button>
                 </div>
-
+            </div>
         </div>
         {{/each}}
     </div>

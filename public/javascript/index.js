@@ -1,6 +1,5 @@
 function like(event) {
     const button = event.currentTarget
-    console.log('Hola');
 
 	axios.post(`http://localhost:3000/projects/${button.id}/like`)
 		.then(res => {

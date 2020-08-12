@@ -45,7 +45,6 @@ module.exports.renderForm = (req, res, next) => {
 
 module.exports.createProject = (req, res) => {
   const projectData = req.body
-  console.log(req.body.link);
   projectData.user = req.currentUser._id
   const project = new Project (projectData)
 

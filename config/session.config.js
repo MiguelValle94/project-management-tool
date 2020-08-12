@@ -16,6 +16,6 @@ const session = expressSession({
     mongooseConnection: mongoose.connection,
     ttl: process.env.SESSION_MAX_AGE || 3600,
   }),
-});
+})
 
 module.exports = session

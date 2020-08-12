@@ -99,7 +99,6 @@ module.exports.renderProfile = (req, res, next) => {
     .populate('comments')
     .populate('like')
     .then(project => {
-        console.log(project);
         res.render('users/profile', {
             project,
             current: req.currentUser

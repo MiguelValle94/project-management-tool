@@ -20,10 +20,10 @@ module.exports.noAuthenticated = (req, res, next) => {
   User.findById(req.session.userId)
     .then((user) => {
       if (user) {
-        res.redirect("/")
+        res.redirect('/')
       } else {
         next()
       }
     })
     .catch(next)
-};
+}
