@@ -13,11 +13,12 @@ router.get('/signup', sessionMiddleware.noAuthenticated, userController.renderSi
 router.post('/signup', sessionMiddleware.noAuthenticated, fileUploader.single('avatar'), userController.signup)
 router.get('/activate/:token', userController.activate)
 
-
 router.get('/projects',  sessionMiddleware.authenticated, projectController.renderAll)
 router.get('/projects/:id', sessionMiddleware.authenticated, projectController.renderProject)
-router.post('/projects/:id/like', sessionMiddleware.authenticated, projectController.like)
+router.get('/new-project', sessionMiddleware.authenticated, projectController.renderForm)
+router.post('/new-project', sessionMiddleware.authenticated, fileUploader.single('image'), projectController.createProject)
 router.post('/new-comment/:id', sessionMiddleware.authenticated, projectController.newComment)
+router.post('/projects/:id/like', sessionMiddleware.authenticated, projectController.like)
 
 router.get('/profile/:id', sessionMiddleware.authenticated, userController.renderProfile)
 

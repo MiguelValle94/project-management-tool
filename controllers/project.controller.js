@@ -39,6 +39,21 @@ module.exports.renderProject= (req, res, next) => {
   .catch(next)
 }
 
+module.exports.renderForm = (req, res, next) => {
+  res.render('projects/project-form')
+}
+
+module.exports.createProject = (req, res) => {
+  const projectData = req.body
+  console.log(req.body.link);
+  projectData.user = req.currentUser._id
+  const project = new Project (projectData)
+
+  project.save()
+  .then(() => res.redirect(`/profile/${req.currentUser._id}`))
+  .catch(err => console.log(err))
+}
+
 module.exports.newComment = (req, res) => {
   const commentData = req.body
   commentData.user = req.currentUser._id

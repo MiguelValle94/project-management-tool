@@ -1,5 +1,5 @@
 <div class="card w-20 m-3 m-3 card-body d-flex flex-column align-items-center">
-    <h4>{{title}}</h2>
+    <h4>{{project.title}}</h2>
         <h5>User: {{project.user.username}}</h5>
         <p>{{project.description}}</p>
         <a href="{{project.link}}" class="btn btn-secondary mb-3">Link to the project</a>
@@ -10,7 +10,7 @@
             <form action="/new-comment/{{project._id}}" method="POST">
                 <input type="text" id="input-content" name="text" placeholder="Your text" class="w-100">
 
-                <button type="submit" class="btn btn-primary mb-4">Add comment</button>
+                <button type="submit" class="btn btn-primary mt-3 mb-4">Add comment</button>
 
                 {{#if errorMessage}}
                 <p class="error">{{errorMessage}}</p>

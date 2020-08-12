@@ -70,7 +70,7 @@ module.exports.signup = (req, res, next) => {
     })
     .catch((error) => {
         if (error instanceof mongoose.Error.ValidationError) {
-          res.render("users/signup", { error: error.errors, user });
+          res.render('users/signup', { error: error.errors, user })
         } else {
           next(error)
         }
@@ -93,21 +93,22 @@ module.exports.activate = (req, res, next) => {
     .catch(e => next)
 }
   
-module.exports.logout = (req, res, next) => {
-    req.session.destroy()
-    res.redirect('/login')
-}
-
 module.exports.renderProfile = (req, res, next) => {
-    User.findById(req.params.id)
+    Project.find({ user: req.params.id })
     .sort({ createdAt: -1 })
-    .populate('projects')
-    .then(user => {
-        console.log(user.projects);
+    .populate('comments')
+    .populate('like')
+    .then(project => {
+        console.log(project);
         res.render('users/profile', {
-            user,
+            project,
             current: req.currentUser
         })
     })
     .catch(err => console.log(err))
+}
+
+module.exports.logout = (req, res, next) => {
+    req.session.destroy()
+    res.redirect('/login')
 }
