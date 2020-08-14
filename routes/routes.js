@@ -17,10 +17,13 @@ router.get('/activate/:token', userController.activate)
 
 router.get('/projects',  sessionMiddleware.authenticated, projectController.renderAll)
 router.get('/projects/:id', sessionMiddleware.authenticated, projectController.renderProject)
-router.get('/new-project', sessionMiddleware.authenticated, projectController.renderForm)
+router.get('/projects/:id/edit', sessionMiddleware.authenticated, projectController.renderEditForm)
+router.post('/projects/:id/edit', sessionMiddleware.authenticated, fileUploader.single('image'), projectController.edit)
+router.get('/new-project', sessionMiddleware.authenticated, projectController.renderCreateForm)
 router.post('/new-project', sessionMiddleware.authenticated, fileUploader.single('image'), projectController.createProject)
 router.post('/new-comment/:id', sessionMiddleware.authenticated, projectController.newComment)
 router.post('/projects/:id/like', sessionMiddleware.authenticated, projectController.like)
+router.post('/delete/:id', sessionMiddleware.authenticated, projectController.deleteProject)
 
 router.get('/profile/:id', sessionMiddleware.authenticated, userController.renderProfile)
 

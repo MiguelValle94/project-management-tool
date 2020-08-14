@@ -39,7 +39,22 @@ module.exports.renderProject= (req, res, next) => {
   .catch(next)
 }
 
-module.exports.renderForm = (req, res, next) => {
+module.exports.renderEditForm = (req, res, next) => {
+  Project.findById(req.params.id)
+  .then(project => {
+    res.render('projects/edit-form', project)
+  }) 
+}
+
+module.exports.edit = (req, res, next) => {
+  const {title, description, link, image} = req.body
+  console.log(req.body);
+  Project.findByIdAndUpdate(req.params.id, { title, description, link, image }, { new: true })
+  .then(() => res.redirect(`/profile/${req.currentUser._id}`))
+  .catch(e => console.log(e))
+}
+
+module.exports.renderCreateForm = (req, res, next) => {
   res.render('projects/project-form')
 }
 
@@ -85,4 +100,10 @@ module.exports.like = (req, res, next) => {
     }
   })
   .catch(next)
+}
+
+module.exports.deleteProject = (req, res, next) => {
+  Project.findByIdAndRemove(req.params.id)
+  .then(() => res.redirect('/projects'))
+  .catch(e => console.log(e))
 }

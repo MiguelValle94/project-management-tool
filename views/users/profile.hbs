@@ -19,15 +19,14 @@
                 </h3>
 
                 <p class="card-text">
-                    Created by: <b>{{project.user.username}}</b>
-                </p>
-
-                <p class="card-text">
                     {{project.description}}
                 </p>
 
                 <a href="{{project.link}}" class="btn btn-secondary mb-3">Link to the project</a>
-                <a href="/edit/{{project.id}}" class="btn btn-outline-warning">Edit</a>
+                <a href="/projects/{{project.id}}/edit" class="btn btn-outline-warning mb-3">Edit</a>
+                <form action="/delete/{{project.id}}" method="POST">
+                    <button type="submit" class="btn btn-sm mb-2 btn-outline-danger">Delete</button>
+                </form>
 
                 <img class="rounded-sm w-20 mb-1" src="{{project.image}}" style="width: 450px!important;"/>
 
