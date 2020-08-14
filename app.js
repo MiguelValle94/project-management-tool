@@ -3,6 +3,7 @@ const express = require('express')
 const logger = require('morgan')
 const path = require('path')
 const cookieParser = require('cookie-parser')
+const passport = require('./config/passport.config')
 
 require('./config/db.config')
 require('./config/hbs.config')
@@ -15,6 +16,8 @@ app.use(express.static(path.join(__dirname, 'public'))) //Static files
 app.use(logger('dev'))
 app.use(cookieParser()) //Parse Cookie header and populate req.cookies
 app.use(session) //Cookies
+app.use(passport)
+
 
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'hbs')

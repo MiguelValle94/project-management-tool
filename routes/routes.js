@@ -4,11 +4,13 @@ const fileUploader = require('../config/cloudinary.config')
 const projectController = require('../controllers/project.controller')
 const userController = require('../controllers/user.controller')
 const sessionMiddleware = require('../middlewares/session.middleware')
+const passport = require('passport')
 
 router.get('/', (req, res) => res.redirect('/projects'))
 
 router.get('/login', sessionMiddleware.noAuthenticated, userController.renderLogin)
 router.post('/login', sessionMiddleware.noAuthenticated, userController.Login)
+router.get('/auth/slack', sessionMiddleware.noAuthenticated, userController.doSocialLogin)
 router.get('/signup', sessionMiddleware.noAuthenticated, userController.renderSignup)
 router.post('/signup', sessionMiddleware.noAuthenticated, fileUploader.single('avatar'), userController.signup)
 router.get('/activate/:token', userController.activate)

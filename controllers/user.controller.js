@@ -4,6 +4,7 @@ const Project = require('../models/project.model')
 const Comment = require('../models/comment.model')
 const Like = require('../models/like.model')
 const nodemailer = require('../config/nodemailer.config')
+const passport = require('passport')
 
 
 module.exports.renderLogin = (req, res, next) => {
@@ -50,6 +51,19 @@ module.exports.Login = (req, res, next) => {
         }
     })
     .catch(next)
+}
+
+module.exports.doSocialLogin = (req, res, next) => {
+    const passportController = passport.authenticate('slack', (error, user) => {
+      if (error) {
+        next(error)
+      } else {
+        req.session.userId = user._id
+        res.redirect('/')
+      }
+    })
+  
+    passportController(req, res, next)
 }
   
 module.exports.renderSignup = (req, res, next) => {

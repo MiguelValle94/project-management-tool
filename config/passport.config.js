@@ -1,6 +1,8 @@
-const passport = require('passport')
-const User = require('../models/user.model')
-const SlackStrategy = require('passport-slack').Strategy
+const passport = require('passport');
+const User = require('../models/user.model');
+const SlackStrategy = require('passport-slack').Strategy;
+
+const randomPassword = () => Math.random().toString(36).substring(7)
 
 const slack = new SlackStrategy(
   {
@@ -9,20 +11,22 @@ const slack = new SlackStrategy(
     callbackUrl: "/auth/slack",
   },
   (accessToken, refreshToken, profile, next) => {
-    User.findOne({ "social.slack": profile.id })
+    User.findOne({ 'social.slack': profile.id })
       .then((user) => {
         if (user) {
           next(null, user);
         } else {
           const newUser = new User({
-            username: profile.user.email.split("@")[0],
+            username: profile.displayName,
             email: profile.user.email,
             avatar: profile.user.image_1024,
-            password:
-              profile.provider + Math.random().toString(36).substring(7),
+            password: profile.provider + randomPassword(),
             social: {
               slack: profile.id,
             },
+            activation: {
+              active: true
+            }
           })
 
           newUser
@@ -35,7 +39,7 @@ const slack = new SlackStrategy(
       })
       .catch((err) => next(err))
   }
-)
+);
 
 passport.use(slack)
 
