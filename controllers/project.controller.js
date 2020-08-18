@@ -48,7 +48,6 @@ module.exports.renderEditForm = (req, res, next) => {
 
 module.exports.edit = (req, res, next) => {
   const {title, description, link, image} = req.body
-  console.log(req.body);
   Project.findByIdAndUpdate(req.params.id, { title, description, link, image }, { new: true })
   .then(() => res.redirect(`/profile/${req.currentUser._id}`))
   .catch(e => console.log(e))
@@ -66,40 +65,6 @@ module.exports.createProject = (req, res) => {
   project.save()
   .then(() => res.redirect(`/profile/${req.currentUser._id}`))
   .catch(err => console.log(err))
-}
-
-module.exports.newComment = (req, res) => {
-  const commentData = req.body
-  commentData.user = req.currentUser._id
-  commentData.project =  req.params.id
-  const comment = new Comment (commentData)
-
-  comment.save()
-  .then(() => res.redirect(`/projects/${req.params.id}`))
-  .catch(err => console.log(err))
-}
-
-module.exports.like = (req, res, next) => {
-  const params = { project: req.params.id, user: req.currentUser._id }
-
-  Like.findOne(params)
-  .then(like => {
-    if (like) {
-      Like.findByIdAndRemove(like._id)
-      .then(() => {
-        res.json({ like: -1 })
-      })
-      .catch(next)
-    } else {
-      const newLike = new Like(params)
-      newLike.save()
-      .then(() => {
-        res.json({ like: 1 })
-      })
-      .catch(next)
-    }
-  })
-  .catch(next)
 }
 
 module.exports.deleteProject = (req, res, next) => {

@@ -72,7 +72,8 @@ module.exports.renderSignup = (req, res, next) => {
   
 module.exports.signup = (req, res, next) => {
     const userParams = req.body
-    //userParams.avatar = req.file.path
+    console.log(req);
+    // userParams.avatar = req.file.path
     const user = new User(userParams)
   
     user.save()
@@ -119,6 +120,24 @@ module.exports.renderProfile = (req, res, next) => {
         })
     })
     .catch(err => console.log(err))
+}
+
+module.exports.renderEditProfile = (req, res, next) => {
+    User.findById(req.params.id)
+    .then(user => {
+        res.render('users/edit-profile', user)
+    })
+    .catch(err => console.log(err))
+}
+
+module.exports.editProfile = (req, res, next) => {
+    const {username, email, avatar, password} = req.body
+    User.findByIdAndUpdate(req.params.id, { username, email, avatar, password }, { new: true })
+    .then(user => {
+        req.currentUser = user
+        res.redirect(`/profile/${req.currentUser._id}`)
+    })
+    .catch(e => console.log(e))
 }
 
 module.exports.logout = (req, res, next) => {
