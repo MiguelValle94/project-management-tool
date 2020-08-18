@@ -3,17 +3,23 @@ const Comment = require('../models/comment.model')
 const Like = require('../models/like.model')
 
 module.exports.renderAll = (req, res, next) => {
-  Project.find()
-    .sort({ createdAt: -1 })
+  const criteria = {}
+
+  if (req.query.search) {
+    res.locals.search = req.query.search
+    criteria['$or'] = [
+      { name: new RegExp(req.query.search, "i") },
+      { ['title']: new RegExp(req.query.search, "i") },
+    ]
+  }
+
+  Project.find(criteria)
+    .sort({createdAt: -1})
     .populate('user')
     .populate('comments')
     .populate('likes')
-    .limit(20)
     .then(projects => {
-      res.render('projects/wall', {
-        projects,
-        current: req.currentUser
-      })
+      res.render('projects/wall', { projects, current: req.currentUser })
     })
     .catch(next)
 }
@@ -22,13 +28,14 @@ module.exports.renderProject= (req, res, next) => {
 
   Project.findById(req.params.id)
   .populate('user')
-  .populate('comments')
-  .populate({ 
+  .populate({
     path: 'comments',
-    populate: {
-      path: 'user',
-      model: 'User'
-    }
+    options: {
+      sort: {
+        createdAt: -1
+      }
+    },
+    populate: 'user'
   })
   .then(project => {
     res.render('projects/project', {
