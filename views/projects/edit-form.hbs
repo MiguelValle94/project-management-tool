@@ -1,25 +1,25 @@
 <div id="form" class="w-100 ">
     <h4>NEW PROJECT:</h4>
-    <form action="/projects/{{id}}/edit" method="POST" enctype="multipart/form-data">
+    <form action="/projects/{{project.id}}/edit" method="POST" enctype="multipart/form-data">
 
         <div class="form-group">
             <label for="title">Title</label>
-            <input type="text" id="input-content" name="title" placeholder="Title" class="w-100" value="{{title}}">
+            <input type="text" id="input-content" name="title" placeholder="Title" class="w-100" value="{{project.title}}">
         </div>
 
         <div class="form-group">
             <label for="description">Description</label>
-            <input type="text" id="input-content" name="description" placeholder="Title" class="w-100" value="{{description}}">
+            <input type="text" id="input-content" name="description" placeholder="Title" class="w-100" value="{{project.description}}">
         </div>
 
         <div class="form-group">
             <label for="link">Link</label>
-            <input type="text" id="input-content" name="link" placeholder="Link to Project" class="w-100" value="{{link}}">
+            <input type="text" id="input-content" name="link" placeholder="Link to Project" class="w-100" value="{{project.link}}">
         </div>
 
         <div class="form-group">
             <label for="iamge">Image</label>
-            <input type="file" id="input-content" name="image" placeholder="Image" class="w-100">
+            <input type="file" id="input-content" name="image" placeholder="Image" class="w-100" value="{{project.image}}">
         </div>
 
         <button type="submit" class="btn btn-warning mt-3 mb-4">Edit project</button>

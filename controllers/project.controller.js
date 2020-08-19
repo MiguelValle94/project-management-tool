@@ -49,12 +49,13 @@ module.exports.renderProject= (req, res, next) => {
 module.exports.renderEditForm = (req, res, next) => {
   Project.findById(req.params.id)
   .then(project => {
-    res.render('projects/edit-form', project)
+    res.render('projects/edit-form', {project, current: req.currentUser})
   }) 
 }
 
 module.exports.edit = (req, res, next) => {
-  const {title, description, link, image} = req.body
+  const {title, description, link} = req.body
+  const image = req.file ? req.file.path : null
   Project.findByIdAndUpdate(req.params.id, { title, description, link, image }, { new: true })
   .then(() => res.redirect(`/profile/${req.currentUser._id}`))
   .catch(e => console.log(e))
@@ -67,6 +68,7 @@ module.exports.renderCreateForm = (req, res, next) => {
 module.exports.createProject = (req, res) => {
   const projectData = req.body
   projectData.user = req.currentUser._id
+  projectData.image = req.file ? req.file.path : null
   const project = new Project (projectData)
 
   project.save()
