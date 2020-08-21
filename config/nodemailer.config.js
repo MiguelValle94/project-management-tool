@@ -1,8 +1,8 @@
 const nodemailer = require('nodemailer')
 
 const host = process.env.PORT
-const user = process.env.EMAIL
-const password = process.env.PASSWORD
+const user = process.env.NM_EMAIL
+const password = process.env.NM_PASSWORD
 
 const transport = nodemailer.createTransport(
 	{
