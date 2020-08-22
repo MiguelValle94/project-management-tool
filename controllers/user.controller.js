@@ -74,6 +74,7 @@ module.exports.signup = (req, res, next) => {
     const userParams = req.body
     userParams.avatar = req.file ? req.file.path : null
     const user = new User(userParams)
+    console.log(user);
   
     user.save()
     .then(user => {

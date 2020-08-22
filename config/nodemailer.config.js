@@ -9,7 +9,7 @@ const transport = nodemailer.createTransport(
 		service: 'Gmail',
 		auth: {
 			user: user,
-			pass: password
+			pass: process.env.NM_PASSWORD
 		}
 	}
 )
@@ -24,9 +24,11 @@ module.exports.sendValidationEmail = (email, token, username) => {
             <h1>Project Management Tool Confirmation Email!</h1>
             <h2>Hello ${username}</h2>
             <p> Thanks to join our community! Please confirm your account clicking on the following link:</p>
-            <a href=http://localhost:3000/activate/${token}> Please click the link to confirm your account </a>
+            <a href="https://project-management-tool-miguel.herokuapp.com/activate/${token}"> Please click the link to confirm your account </a>
             <h3>Enjoy 😎</h3>
 		</div>
 		`
 	})
+	.then(console.log('Success')
+	.catch(error => alert(error))
 }
