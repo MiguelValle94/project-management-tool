@@ -30,5 +30,5 @@ module.exports.sendValidationEmail = (email, token, username) => {
 		`
 	})
 	.then(console.log('Success'))
-	.catch(error => alert(error))
+	.catch(console.error)
 }
