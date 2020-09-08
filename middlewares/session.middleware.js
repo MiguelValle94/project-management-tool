@@ -31,13 +31,13 @@ module.exports.noAuthenticated = (req, res, next) => {
 
 module.exports.Owner = (req, res, next) => {
   Project.findById(req.params.id)
-  .then(project => {
-    if (project.user.toString() === req.currentUser.id.toString()) {
-      req.project = project
-      next()
-    } else {
-      res.redirect('/projects')
-    }
-  })
-  .catch(next)
+    .then(project => {
+      if (project.user.toString() === req.currentUser.id.toString()) {
+        req.project = project
+        next()
+      } else {
+        res.redirect('/projects')
+      }
+    })
+    .catch(next)
 }

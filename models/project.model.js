@@ -5,9 +5,9 @@ require('./comment.model')
 require('./like.model')
 
 const projectSchema = new mongoose.Schema(
-  { 
+  {
     title: {
-        type: String,
+      type: String,
     },
     user: {
       type: mongoose.Schema.Types.ObjectId,

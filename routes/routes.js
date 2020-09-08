@@ -16,7 +16,7 @@ router.get('/signup', sessionMiddleware.noAuthenticated, userController.renderSi
 router.post('/signup', sessionMiddleware.noAuthenticated, fileUploader.single('avatar'), userController.signup)
 router.get('/activate/:token', userController.activate)
 
-router.get('/projects',  sessionMiddleware.authenticated, projectController.renderAll)
+router.get('/projects', sessionMiddleware.authenticated, projectController.renderAll)
 router.get('/projects/:id', sessionMiddleware.authenticated, projectController.renderProject)
 router.get('/projects/:id/edit', sessionMiddleware.authenticated, sessionMiddleware.Owner, projectController.renderEditForm)
 router.post('/projects/:id/edit', sessionMiddleware.authenticated, sessionMiddleware.Owner, fileUploader.single('image'), projectController.edit)
@@ -32,4 +32,4 @@ router.post('/profile/:id/edit', sessionMiddleware.authenticated, fileUploader.s
 
 router.post('/logout', sessionMiddleware.authenticated, userController.logout)
 
-module.exports= router
+module.exports = router

@@ -19,7 +19,7 @@ module.exports.sendValidationEmail = (email, token, username) => {
 		to: email,
 		from: 'Project Management Tool team',
 		subject: 'Please activate your account',
-        html: `
+		html: `
         <div style='text-align:center; background-color:rgb(232,232,232)'>
             <h1>Project Management Tool Confirmation Email!</h1>
             <h2>Hello ${username}</h2>
@@ -29,6 +29,6 @@ module.exports.sendValidationEmail = (email, token, username) => {
 		</div>
 		`
 	})
-	.then(console.log('Success'))
-	.catch(console.error)
+		.then(console.log('Success'))
+		.catch(console.error)
 }
